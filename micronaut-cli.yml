@@ -1,0 +1,5 @@
+profile: service
+defaultPackage: lidar.search.ui
+---
+testFramework: junit
+sourceLanguage: java
