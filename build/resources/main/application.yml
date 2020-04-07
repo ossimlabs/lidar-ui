@@ -1,0 +1,4 @@
+micronaut:
+  application:
+    name: lidar-search-ui
+
