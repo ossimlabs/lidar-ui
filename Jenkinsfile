@@ -29,22 +29,17 @@ node("${BUILD_NODE}") {
 		
     }
 
-    stage ("Publish Nexus")
-    {
+stage('Push Docker Images to Nexus Registry'){
         withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                        credentialsId: 'dockerCredentials',
-                        usernameVariable: 'DOCKER_REGISTRY_USERNAME',
-                        passwordVariable: 'DOCKER_REGISTRY_PASSWORD']])
+                        credentialsId: 'nexusCredentials',
+                        usernameVariable: 'MAVEN_REPO_USERNAME',
+                        passwordVariable: 'MAVEN_REPO_PASSWORD']])
         {
-            sh """
-	    chmod +x gradlew
-	    """
-	    sh """
-            ./gradlew pushDockerImage \
-                -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
-            """
-        }
-    }
+	sh """
+		docker push https://nexus.ossim.io/#browse/browse:docker-public-group/LIDAR-Search-UI}
+	"""
+	}
+}
 		
     try {
         stage ("OpenShift Tag Image") {
