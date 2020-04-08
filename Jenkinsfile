@@ -38,7 +38,7 @@ node("${BUILD_NODE}") {
         {
             sh """
             ./gradlew publish \
-                -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
+                -PossimMavenProxy=lidar-search-ui
             """
         }
     }
@@ -56,7 +56,7 @@ node("${BUILD_NODE}") {
                 // Run all tasks on the app. This includes pushing to OpenShift and S3.
                 sh """
                     ./gradlew openshiftTagImage \
-                        -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
+                        -PossimMavenProxy=lidar-search-ui
                 """
             }
         }
