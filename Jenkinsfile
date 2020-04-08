@@ -29,7 +29,23 @@ node("${BUILD_NODE}") {
 		
     }
 
-
+    stage ("Publish Nexus")
+    {
+        withCredentials([[$class: 'UsernamePasswordMultiBinding',
+                        credentialsId: 'nexusCredentials',
+                        usernameVariable: 'MAVEN_REPO_USERNAME',
+                        passwordVariable: 'MAVEN_REPO_PASSWORD']])
+        {
+            sh """
+            ./gradlew publish \
+                -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
+            """
+        }
+    }
+	
+	
+	
+	
     try {
         stage ("OpenShift Tag Image") {
             withCredentials([[$class: 'UsernamePasswordMultiBinding',
