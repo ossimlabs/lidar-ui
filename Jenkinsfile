@@ -24,7 +24,7 @@ node("${BUILD_NODE}") {
 	
 	stage ('Build image') {
             sh """
-                docker build -t lidar-search-ui
+                docker build -t lidar-search-ui .
             """
 		
     }
