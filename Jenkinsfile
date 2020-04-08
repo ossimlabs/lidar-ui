@@ -23,8 +23,10 @@ node("${BUILD_NODE}") {
     }
 	
 	stage ('Build image') {
-        
-		app = docker build -t lidar-search-ui
+            sh """
+                docker build -t lidar-search-ui
+            """
+		
     }
 
 
