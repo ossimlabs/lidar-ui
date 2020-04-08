@@ -36,7 +36,9 @@ node("${BUILD_NODE}") {
                         usernameVariable: 'MAVEN_REPO_USERNAME',
                         passwordVariable: 'MAVEN_REPO_PASSWORD']])
         {
-            chmod +x gradlew
+            sh """
+	    chmod +x gradlew
+	    """
 	    sh """
             ./gradlew publish \
                 -PossimMavenProxy
