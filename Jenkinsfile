@@ -32,16 +32,16 @@ node("${BUILD_NODE}") {
     stage ("Publish Nexus")
     {
         withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                        credentialsId: 'nexusCredentials',
-                        usernameVariable: 'MAVEN_REPO_USERNAME',
-                        passwordVariable: 'MAVEN_REPO_PASSWORD']])
+                        credentialsId: 'dockerCredentials',
+                        usernameVariable: 'DOCKER_REGISTRY_USERNAME',
+                        passwordVariable: 'DOCKER_REGISTRY_PASSWORD']])
         {
             sh """
 	    chmod +x gradlew
 	    """
 	    sh """
-            ./gradlew publish \
-                -PossimMavenProxy
+            ./gradlew pushDockerImage \
+                -PossimMavenProxy=${OSSIM_MAVEN_PROXY}
             """
         }
     }
