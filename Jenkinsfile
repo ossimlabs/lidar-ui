@@ -24,7 +24,7 @@ node("${BUILD_NODE}") {
 	
 	stage ('Build image') {
             sh """
-                docker build -t lidar-search-ui .=${lidar-search-ui}
+                docker build -t lidar-search-ui .
             """
 		
     }
@@ -37,15 +37,12 @@ node("${BUILD_NODE}") {
                         passwordVariable: 'MAVEN_REPO_PASSWORD']])
         {
             sh """
-            ./gradlew publish \
-                -PossimMavenProxy=${lidar-search-ui}
+            gradlew publish \
+                -PossimMavenProxy
             """
         }
     }
-	
-	
-	
-	
+		
     try {
         stage ("OpenShift Tag Image") {
             withCredentials([[$class: 'UsernamePasswordMultiBinding',
@@ -56,7 +53,7 @@ node("${BUILD_NODE}") {
                 // Run all tasks on the app. This includes pushing to OpenShift and S3.
                 sh """
                     ./gradlew openshiftTagImage \
-                        -PossimMavenProxy=${lidar-search-ui}
+                        -PossimMavenProxy
                 """
             }
         }
