@@ -23,7 +23,7 @@ pipeline{
 	
 	stage ('Build image') {
         
-		app = docker.build -t lidar-search-ui
+		app = docker build -t lidar-search-ui
     }
 
 
