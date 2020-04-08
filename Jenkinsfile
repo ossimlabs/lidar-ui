@@ -21,7 +21,7 @@ pipeline{
 		checkout scm
     }
 	
-	stage ('Build image) {
+	stage ('Build image') {
         
 		app = docker.build -t lidar-search-ui
     }
