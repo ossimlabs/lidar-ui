@@ -24,7 +24,7 @@ node("${BUILD_NODE}") {
 	
 	stage ('Build image') {
             sh """
-                docker build -t lidar-search-ui .
+                docker build -t lidar-search-ui .=${lidar-search-ui}
             """
 		
     }
@@ -38,7 +38,7 @@ node("${BUILD_NODE}") {
         {
             sh """
             ./gradlew publish \
-                -PossimMavenProxy=lidar-search-ui
+                -PossimMavenProxy=${lidar-search-ui}
             """
         }
     }
@@ -56,7 +56,7 @@ node("${BUILD_NODE}") {
                 // Run all tasks on the app. This includes pushing to OpenShift and S3.
                 sh """
                     ./gradlew openshiftTagImage \
-                        -PossimMavenProxy=lidar-search-ui
+                        -PossimMavenProxy=${lidar-search-ui}
                 """
             }
         }
