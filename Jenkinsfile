@@ -24,7 +24,7 @@ node("${BUILD_NODE}") {
     }
 
 	stage('Push Docker Images to Nexus Registry'){
-		withDockerRegistry(credentialsId: 'nexus-credentials', url: "https://nexus-docker-private-hosted.ossim.io")  {
+		withDockerRegistry(credentialsId: 'mavenCredentials', url: "https://nexus-docker-private-hosted.ossim.io")  {
 			
 			sh """
 			   docker push nexus-docker-private-hosted.ossim.io/lidar-search-ui
