@@ -30,6 +30,9 @@ node("${BUILD_NODE}") {
                         passwordVariable: REPOSITORY_MANAGER_PASSWORD]])
         {
 			sh """
+			   docker login nexus-docker-private-hosted.ossim.io
+			"""
+			sh """
 			   docker push nexus-docker-private-hosted.ossim.io/lidar-search-ui
 			"""
 		}
