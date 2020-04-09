@@ -19,16 +19,16 @@ node("${BUILD_NODE}") {
 	
 	stage ('Build image') {
         sh """
-           docker build -t nexus-docker-private-hosted.ossim.io/lidar-search-ui .
+           docker build -t nexus-docker-public-hosted.ossim.io/lidar-search-ui .
         """		
     }
 
 	stage('Push Docker Images to Nexus Registry'){
 			sh """
-			   docker login nexus-docker-private-hosted.ossim.io
+			   docker login nexus-docker-public-hosted.ossim.io
 			"""
 			sh """
-			   docker push nexus-docker-private-hosted.ossim.io/lidar-search-ui
+			   docker push nexus-docker-public-hosted.ossim.io/lidar-search-ui
 			"""
 	}
 		
