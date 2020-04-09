@@ -24,18 +24,12 @@ node("${BUILD_NODE}") {
     }
 
 	stage('Push Docker Images to Nexus Registry'){
-       		withCredentials([[$class: 'UsernamePasswordMultiBinding',
-                        credentialsId: 'nexusCredentials',
-                        usernameVariable: REPOSITORY_MANAGER_USER,
-                        passwordVariable: REPOSITORY_MANAGER_PASSWORD]])
-        {
 			sh """
 			   docker login nexus-docker-private-hosted.ossim.io
 			"""
 			sh """
 			   docker push nexus-docker-private-hosted.ossim.io/lidar-search-ui
 			"""
-		}
 	}
 		
     try {
