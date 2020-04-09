@@ -26,26 +26,14 @@ node("${BUILD_NODE}") {
 	stage('Push Docker Images to Nexus Registry'){
        		withCredentials([[$class: 'UsernamePasswordMultiBinding',
                         credentialsId: 'nexusCredentials',
-                        usernameVariable: 'MAVEN_REPO_USERNAME',
-                        passwordVariable: 'MAVEN_REPO_PASSWORD']])
+                        usernameVariable: REPOSITORY_MANAGER_USER,
+                        passwordVariable: REPOSITORY_MANAGER_PASSWORD]])
         {
 			sh """
 			   docker push nexus-docker-private-hosted.ossim.io/lidar-search-ui
 			"""
 		}
 	}
-	
-	stage("Load Variables")
-    {
-        withCredentials([string(credentialsId: 'o2-artifact-project', variable: 'o2ArtifactProject')]) {
-            step ([$class: "CopyArtifact",
-                projectName: o2ArtifactProject,
-                filter: "common-variables.groovy",
-                flatten: true])
-        }
-
-        load "common-variables.groovy"
-    }
 		
     try {
        	stage ("OpenShift Tag Image") {
