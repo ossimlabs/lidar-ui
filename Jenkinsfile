@@ -24,7 +24,7 @@ node("${BUILD_NODE}") {
 	
 	stage ('Build image') {
             sh """
-                docker build -t lidar-search-ui .
+                docker build -t nexus-docker-private-hosted.ossim.io/lidar-search-ui .
             """
 		
     }
@@ -36,7 +36,7 @@ stage('Push Docker Images to Nexus Registry'){
                         passwordVariable: 'MAVEN_REPO_PASSWORD']])
         {
 	sh """
-		docker push https://nexus.ossim.io/#browse/browse:docker-public-group/LIDAR-Search-UI}
+		docker push nexus-docker-private-hosted.ossim.io/lidar-search-ui
 	"""
 	}
 }
