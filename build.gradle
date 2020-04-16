@@ -1,33 +1,23 @@
-plugins {
-    id "com.github.node-gradle.node" version "1.3.0"
-}
-
-node {
-    version = '10.15.0' // https://nodejs.org/en/
-    yarnVersion = '1.13.0' // https://yarnpkg.com/en/
-    download = true
-}
-
-task start(type: YarnTask, dependsOn: 'yarn') {
-    group = 'application'
-    description = 'Run the client app'
-    args = ['run', 'start']
-}
-
-task build(type: YarnTask, dependsOn: 'yarn') {
+task copyClientResources(dependsOn: ':client:build') { //<1>
     group = 'build'
-    description = 'Build the client bundle'
-    args = ['run', 'build']
+    description = 'Copy client resources into server'
+}
+copyClientResources.doFirst { //<2>
+    copy {
+        from project(':client').buildDir.absolutePath
+        into "${project(':server').buildDir}/resources/main/public"
+    }
 }
 
-task test(type: YarnTask, dependsOn: 'yarn') {
-    group = 'verification'
-    description = 'Run the client tests'
-    args = ['run', 'test']
+task assembleServerAndClient(dependsOn: ['copyClientResources', ':server:shadowJar']) { //<3>
+    group = 'build'
+    description = 'Build combined server & client JAR'
 }
 
-task eject(type: YarnTask, dependsOn: 'yarn') {
-    group = 'other'
-    description = 'Eject from the create-react-app scripts'
-    args = ['run', 'eject']
+task test {
+
+}
+
+task check {
+
 }
