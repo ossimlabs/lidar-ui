@@ -1,64 +1,23 @@
-plugins {
-    id "net.ltgt.apt-eclipse" version "0.21"
-    id "com.github.johnrengelman.shadow" version "5.2.0"
-    id "application"
+task copyClientResources(dependsOn: ':client:build') { //<1>
+    group = 'build'
+    description = 'Copy client resources into server'
+}
+copyClientResources.doFirst { //<2>
+    copy {
+        from project(':client').buildDir.absolutePath
+        into "${project(':server').buildDir}/resources/main/public"
+    }
 }
 
-
-
-version "0.1"
-group "lidar.search.ui"
-
-repositories {
-    mavenCentral()
-    maven { url "https://jcenter.bintray.com" }
+task assembleServerAndClient(dependsOn: ['copyClientResources', ':server:shadowJar']) { //<3>
+    group = 'build'
+    description = 'Build combined server & client JAR'
 }
 
-configurations {
-    // for dependencies that are needed for development only
-    developmentOnly 
+task test {
+
 }
 
-dependencies {
-    annotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
-    annotationProcessor "io.micronaut:micronaut-inject-java"
-    annotationProcessor "io.micronaut:micronaut-validation"
-    implementation platform("io.micronaut:micronaut-bom:$micronautVersion")
-    implementation "io.micronaut:micronaut-inject"
-    implementation "io.micronaut:micronaut-validation"
-    implementation "io.micronaut:micronaut-runtime"
-    implementation "io.micronaut:micronaut-http-server-netty"
-    implementation "io.micronaut:micronaut-http-client"
-    runtimeOnly "ch.qos.logback:logback-classic:1.2.3"
-    testAnnotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
-    testAnnotationProcessor "io.micronaut:micronaut-inject-java"
-    testImplementation platform("io.micronaut:micronaut-bom:$micronautVersion")
-    testImplementation "org.junit.jupiter:junit-jupiter-api"
-    testImplementation "io.micronaut.test:micronaut-test-junit5"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
+task check {
+
 }
-
-test.classpath += configurations.developmentOnly
-
-mainClassName = "lidar.search.ui.Application"
-
-// use JUnit 5 platform
-test {
-    useJUnitPlatform()
-}
-
-tasks.withType(JavaCompile){
-    options.encoding = "UTF-8"
-    options.compilerArgs.add('-parameters')
-}
-
-
-shadowJar {
-    mergeServiceFiles()
-}
-
-tasks.withType(JavaExec) {
-    classpath += configurations.developmentOnly
-    jvmArgs('-noverify', '-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
-}
-
