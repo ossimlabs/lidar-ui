@@ -3,6 +3,10 @@ micronaut:
     name: server
 ---
 #tag::cors[]
+settings:
+  banner:
+    text: "Unclassified"
+    color: rgb(100,60,255)
 micronaut:
   server:
     cors:
