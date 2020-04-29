@@ -32,7 +32,7 @@ node("${BUILD_NODE}") {
 		}
 	}
 		
-    try {
+   /* try {
        	stage ("OpenShift Tag Image") {
            	withCredentials([[$class: 'UsernamePasswordMultiBinding',
 				credentialsId: 'openshiftCredentials',
@@ -48,7 +48,7 @@ node("${BUILD_NODE}") {
 			}
     	} catch (e) {
         	echo e.toString()
-    	}
+    	}*/
 
     stage("Clean Workspace"){
         if ("${CLEAN_WORKSPACE}" == "true")

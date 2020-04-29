@@ -21,7 +21,7 @@ class Interface extends React.Component {
                     text: response.data.bannerText,
                     color: response.data.bannerColor
                 });
-                /*console.log(response.data.bannerText);*/
+                console.log(response.data.bannerText);
             });
     }
 
@@ -30,18 +30,17 @@ class Interface extends React.Component {
     }
 
     render() {
-        const text = this.state;
+
+        this.style = {
+            backgroundColor: 'rgb(200,0,255)'
+        }
         if (this.state.text == "Unclassified"){
             this.style = {
-                'background-color': 'rgb(0,255,0)'
+                backgroundColor: 'rgb(60,255,60)'
             }
-        }else if(this.state.text == "Secret") {
+        }if(this.state.text == "Secret") {
             this.style = {
-                'background-color': 'rgb(255,0,75)'
-            }
-        }else{
-            this.style = {
-                'background-color': 'rgb(200,0,255)'
+                backgroundColor: 'rgb(255,0,75)'
             }
         }
         return (
