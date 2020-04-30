@@ -10,7 +10,9 @@ class Interface extends React.Component {
 
     state = {
         text: "",
-        'background-color': ""
+        backgroundColor: "",
+        color: "",
+        fontWeight: "bold"
     };
 
 
@@ -19,9 +21,12 @@ class Interface extends React.Component {
             .then(response => {
                 this.setState({
                     text: response.data.bannerText,
-                    color: response.data.bannerColor
+                    backgroundColor: response.data.bannerBackgroudColor,
+                    color: response.data.bannerTextColor,
+                    fontWeight: response.data.bannerFontWeight
+
                 });
-                console.log(response.data.bannerText);
+                console.log(response.data);
             });
     }
 
@@ -32,15 +37,21 @@ class Interface extends React.Component {
     render() {
 
         this.style = {
-            backgroundColor: 'rgb(200,0,255)'
+            backgroundColor: this.state.backgroundColor,
+            fontWeight: this.state.fontWeight,
+            color: this.state.color
         }
         if (this.state.text == "Unclassified"){
             this.style = {
-                backgroundColor: 'rgb(60,255,60)'
+                backgroundColor: 'rgb(60,255,60)',
+                fontWeight: this.state.fontWeight,
+                color: this.state.color
             }
         }if(this.state.text == "Secret") {
             this.style = {
-                backgroundColor: 'rgb(255,0,75)'
+                backgroundColor: 'rgb(255,0,75)',
+                fontWeight: this.state.fontWeight,
+                color: this.state.color
             }
         }
         return (

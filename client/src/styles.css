@@ -15,8 +15,6 @@ html, body{
   z-index: 1000;
   padding-top: 0;
   width: 100%;
-  /*background-color: rgb(000,255,000);
-  background-color: rgb(140,0,255);*/
 }
 
 .Interface > h1 {
