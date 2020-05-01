@@ -6,7 +6,7 @@ import io.micronaut.http.annotation.Get;
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller("/hello")
+@Controller("/")
 public class ConfigController {
     @Value("${settings.banner.text}")
     private String bannerText;
