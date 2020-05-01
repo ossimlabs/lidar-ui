@@ -6,7 +6,7 @@ import io.micronaut.http.annotation.Get;
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller("/")
+@Controller("/hello")
 public class ConfigController {
     @Value("${settings.banner.text}")
     private String bannerText;
@@ -17,7 +17,7 @@ public class ConfigController {
     @Value("${settings.banner.font-weight}")
     private String bannerFontWeight;
 
-    @Get
+  @Get
     public Map <String, String> index() {
         Map <String, String> test = new HashMap<>();
         test.put("bannerBackgroundColor", bannerBackgroundColor);

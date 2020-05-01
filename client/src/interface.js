@@ -17,7 +17,7 @@ class Interface extends React.Component {
 
 
     setBanner() {
-        axios.get('http://localhost:8080')
+        axios.get('http://localhost:8080/hello')
             .then(response => {
                 this.setState({
                     text: response.data.bannerText,
