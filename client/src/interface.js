@@ -43,13 +43,13 @@ class Interface extends React.Component {
         }
         if (this.state.text == "Unclassified"){
             this.style = {
-                backgroundColor: 'rgb(60,255,60)',
+                backgroundColor: 'rgb(34,139,34)',
                 fontWeight: this.state.fontWeight,
                 color: this.state.color
             }
         }if(this.state.text == "Secret") {
             this.style = {
-                backgroundColor: 'rgb(255,0,75)',
+                backgroundColor: 'rgb(139,34,34)',
                 fontWeight: this.state.fontWeight,
                 color: this.state.color
             }

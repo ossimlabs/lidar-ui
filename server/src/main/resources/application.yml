@@ -7,7 +7,7 @@ settings:
   banner:
     text: "Unclassified"
     background-color: rgb(200,0,255)
-    text-color: black
+    text-color: white
     font-weight: bold
 micronaut:
   server:
