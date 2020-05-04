@@ -6,7 +6,7 @@ import io.micronaut.http.annotation.Get;
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller("/hello")
+@Controller("http://lidar-dev.ossim.io/")
 public class ConfigController {
     @Value("${settings.banner.text}")
     private String bannerText;
