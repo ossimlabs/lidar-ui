@@ -17,7 +17,7 @@ class Interface extends React.Component {
 
 
     setBanner() {
-        axios.get('http://lidar-dev.ossim.io/')
+        axios.get('http://lidar-dev.ossim.io/hello')
             .then(response => {
                 this.setState({
                     text: response.data.bannerText,
