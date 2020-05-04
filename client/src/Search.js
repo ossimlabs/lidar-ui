@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './styles.css';
 
+//Read in Data from the API
 function Search() {
     const [books, setBooks] = useState(null);
 
@@ -12,6 +13,7 @@ function Search() {
         setBooks(response.data);
     };
 
+//Return the formatted data from the api
     return (
         <div className="Search">
             {/* Fetch data from API */}

@@ -7,7 +7,7 @@ class Interface extends React.Component {
     constructor() {
         super();
     }
-
+// Initialization process
     state = {
         text: "",
         backgroundColor: "",
@@ -15,8 +15,10 @@ class Interface extends React.Component {
         fontWeight: "bold"
     };
 
-
+//Set the state based on Rest APIs
     setBanner() {
+
+//  When running locally, rep[lace axios.get with:  'axios.get('http://localhost:8080/hello')'
         axios.get('http://lidar-dev.ossim.io/hello')
             .then(response => {
                 this.setState({
@@ -24,9 +26,9 @@ class Interface extends React.Component {
                     backgroundColor: response.data.bannerBackgroudColor,
                     color: response.data.bannerTextColor,
                     fontWeight: response.data.bannerFontWeight
-
                 });
-                console.log(response.data);
+                /* For test purposes, console log what is being read from REST endpoints
+                console.log(response.data); */
             });
     }
 
@@ -35,7 +37,7 @@ class Interface extends React.Component {
     }
 
     render() {
-
+        /* Set the Banner Style based on the Banner Text */
         this.style = {
             backgroundColor: this.state.backgroundColor,
             fontWeight: this.state.fontWeight,
@@ -54,6 +56,7 @@ class Interface extends React.Component {
                 color: this.state.color
             }
         }
+        /* Return what will be rendered on the screen */
         return (
             <div className="Interface">
                 <header style={this.style}
@@ -66,4 +69,5 @@ class Interface extends React.Component {
     }
 }
 
+/* Export for other JS files to import */
 export default Interface
