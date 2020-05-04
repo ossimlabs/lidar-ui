@@ -31,7 +31,7 @@ node("${BUILD_NODE}") {
 			"""
 		}
 	}
-		
+/*
    try {
        	stage ("OpenShift Tag Image") {
            	withCredentials([[$class: 'UsernamePasswordMultiBinding',
@@ -49,7 +49,7 @@ node("${BUILD_NODE}") {
     	} catch (e) {
         	echo e.toString()
     	}
-
+*/
     stage("Clean Workspace"){
         if ("${CLEAN_WORKSPACE}" == "true")
            	step([$class: 'WsCleanup'])
