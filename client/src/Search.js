@@ -1,52 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Posts from './components/Post';
+import Pagination from './components/Pagination';
 import axios from 'axios';
 import './styles.css';
 
-//Read in Data from the API
-function Search() {
-    const [books, setBooks] = useState(null);
 
-    const fetchData = async () => {
-        const response = await axios.get(
-            'https://www.anapioficeandfire.com/api/books?pageSize=30'
-        );
-        setBooks(response.data);
-    };
+//Read in Data from the API
+const Search = () => {
+    const [posts, setPost] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(2);
+
+    useEffect(() => {
+      const fetchPost = async () => {
+        setLoading(true);
+        const response = await axios.get('http://localhost:8081/lidarProducts/findAll');
+        setPost(response.data);
+        setLoading(false);
+      }
+      fetchPost();
+    }, []);
+
+// Get current posts
+const indexOfLastPost = currentPage * postsPerPage;
+const indexOfFirstPost = indexOfLastPost - postsPerPage;
+const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+// Change page
+const paginate = (pageNumbers) => setCurrentPage(pageNumbers);
 
 //Return the formatted data from the api
     return (
         <div className="Search">
-            {/* Fetch data from API */}
-            <div>
-                <button className="fetch-button" onClick={fetchData}>
-                    Fetch Data
-                </button>
-                <br />
-            </div>
-            {/* Display data from API */}
-            <div className="books">
-                {books &&
-                books.map((book, index) => {
-                    const cleanedDate = new Date(book.released).toDateString();
-                    const authors = book.authors.join(', ');
-
-                    return (
-                        <div className="book" key={index}>
-                            <h3>Book {index + 1}</h3>
-                            <h2>{book.name}</h2>
-
-                            <div className="details">
-                                <p><span role="img" aria-label="man">👨</span>: {authors}</p>
-                                <p><span role="img" aria-label="book">📖</span>: {book.numberOfPages} pages</p>
-                                <p><span role="img" aria-label="house">🏘️</span>: {book.country}</p>
-                                <p><span role="img" aria-label="clock">⏰</span>: {cleanedDate}</p>
-                            </div>
-                        </div>
-                    );
-                })}
-            </div>
+            <h1>Star Wars Characters</h1>
+            <Posts posts={currentPosts} loading={loading} />
+            <Pagination
+                postsPerPage={postsPerPage}
+                totalPosts={posts.length}
+                paginate={paginate}/>
         </div>
     );
-}
+};
 
 export default Search
