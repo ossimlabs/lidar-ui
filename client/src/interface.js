@@ -19,7 +19,7 @@ class Interface extends React.Component {
     setBanner() {
 
 //  When running locally, rep[lace axios.get with:  'axios.get('http://localhost:8080/hello')'
-        axios.get('http://lidar-dev.ossim.io/hello')
+        axios.get('http://lidar-search-ui.ossim.io/hello')
             .then(response => {
                 this.setState({
                     text: response.data.bannerText,
