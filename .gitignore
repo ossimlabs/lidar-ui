@@ -12,3 +12,5 @@ out
 
 bin/
 /server/build/
+server/build/
+
