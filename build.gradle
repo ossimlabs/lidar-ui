@@ -21,3 +21,4 @@ task test {
 task check {
 
 }
+tasks.getByPath( ':server:shadowJar' ).mustRunAfter( copyClientResources )
