@@ -20,7 +20,7 @@ node("${BUILD_NODE}") {
     	stage ( "Assemble" ) {
 		sh """
 		    export CHROMEDRIVER_SKIP_DOWNLOAD=true
-		    gradle assembleServerAndClient
+		    ./gradlew assembleServerAndClient
 		"""
     	}
 	
