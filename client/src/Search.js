@@ -15,6 +15,7 @@ const Search = () => {
     useEffect(() => {
       const fetchPost = async () => {
         setLoading(true);
+          // I WANT TO CHANGE THIS!!!!
         const response = await axios.get('http://lidar-indexer.ossim.io/lidarProducts/findAll');
   
         setPost(response.data);
