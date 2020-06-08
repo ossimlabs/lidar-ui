@@ -1,7 +1,13 @@
-.DS_Store
+git .DS_Store
 .idea
 .gradle
 build/
 *.iml
 node_modules
 out
+
+.project
+.settings/
+.classpath
+
+bin/
