@@ -15,7 +15,7 @@ const Search = () => {
     useEffect(() => {
       const fetchPost = async () => {
         setLoading(true);
-        const response = await axios.get('http://lidar-indexer.ossim.io:8080/lidarProducts/findAll');
+        const response = await axios.get('http://lidar-indexer.ossim.io/lidarProducts/findAll');
   
         setPost(response.data);
         setLoading(false);
