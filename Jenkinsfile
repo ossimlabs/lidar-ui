@@ -19,7 +19,7 @@ node("${BUILD_NODE}") {
 	
     	stage ( "Assemble" ) {
 		sh """
-		    echo "registry = ${NPM_REGISTRY}" >> .npmrc
+		    //echo "registry = ${NPM_REGISTRY}" >> .npmrc
 		    export CHROMEDRIVER_SKIP_DOWNLOAD=true
 		    ./gradlew assembleServerAndClient
 		"""
