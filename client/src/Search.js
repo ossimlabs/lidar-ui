@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Posts from './components/Post';
+// import Paginate from './components/Paginate';
 import Pagination from './components/Pagination';
 import axios from 'axios';
 import './styles.css';
@@ -17,7 +18,7 @@ const Search = () => {
         setLoading(true);
           // I WANT TO CHANGE THIS!!!!
         const response = await axios.get('http://lidar-indexer.ossim.io/lidarProducts/findAll');
-  
+
         setPost(response.data);
         setLoading(false);
       }

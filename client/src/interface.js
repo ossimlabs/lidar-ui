@@ -61,8 +61,7 @@ class Interface extends React.Component {
             <div className="Interface">
                 <header style={this.style}
                 >{this.state.text}</header>
-                <h1>Game of Thrones Books</h1>
-                <h2>Fetch a list from an API and display it</h2>
+
                 <Search/>
             </div>
         );
