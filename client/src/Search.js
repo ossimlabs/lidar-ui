@@ -36,7 +36,7 @@ const paginate = (pageNumbers) => setCurrentPage(pageNumbers);
 //Return the formatted data from the api
     return (
         <div className="Search">
-            <h1>Star Wars Characters</h1>
+            <h1>Star Wars Characters  Kyzer</h1>
             <Posts posts={currentPosts} loading={loading} />
             <Pagination
                 postsPerPage={postsPerPage}
