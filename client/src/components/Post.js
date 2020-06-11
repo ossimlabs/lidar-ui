@@ -10,7 +10,7 @@ const Posts = ({ posts, loading }) => {
 
     <div className="post" key={post.id}>
         <div className="details">
-            <p><span role="img" aria-label="man">Id</span>: {post.id}</p>
+            <p><span role="img" aria-label="man">Id test</span>: {post.id}</p>
             <p><span role="img" aria-label="book">Ingested on</span>: {new Date(post.ingest_date).toDateString()}</p>
             <p><span role="img" aria-label="house">Character</span>: {post.keyword}</p>
             <p><span role="img" aria-label="clock">Link</span>: {post.s3_link}</p>
