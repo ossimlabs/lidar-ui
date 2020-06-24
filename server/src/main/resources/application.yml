@@ -2,25 +2,28 @@ micronaut:
   application:
     name: server
 ---
-#tag::cors[]
+
 settings:
   banner:
     text: "Unclassified"
     background-color: rgb(200,0,255)
     text-color: white
     font-weight: bold
+  lidar-indexer:
+    url: http://lidar-indexer.ossim.io/lidarProducts/findAll
+
+---
 micronaut:
   server:
     cors:
       enabled: true
-#end::cors[]
+
 ---
-#tag::staticResources[]
 micronaut:
   router:
     static-resources:
       default:
-        enabled: true   #<1>
-        mapping: "/**"  #<2>
-        paths: "classpath:public" #<3>
-#end::staticResources[]
+        enabled: true
+        mapping: "/**"
+        paths: "classpath:public"
+
