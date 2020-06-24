@@ -6,24 +6,32 @@ import io.micronaut.http.annotation.Get;
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller("/hello")
+@Controller("/settings")
 public class ConfigController {
+
     @Value("${settings.banner.text}")
     private String bannerText;
+
     @Value("${settings.banner.background-color}")
     private String bannerBackgroundColor;
+
     @Value("${settings.banner.text-color}")
     private String bannerTextColor;
+
     @Value("${settings.banner.font-weight}")
     private String bannerFontWeight;
 
+    @Value("${settings.lidar-indexer.url}")
+    private String lidarIndexerUrl;
+
   @Get
     public Map <String, String> index() {
-        Map <String, String> test = new HashMap<>();
-        test.put("bannerBackgroundColor", bannerBackgroundColor);
-        test.put("bannerText", bannerText);
-        test.put("bannerTextColor", bannerTextColor);
-        test.put("bannerFontWeight", bannerFontWeight);
-        return test;
+        Map <String, String> settings = new HashMap<>();
+        settings.put("bannerBackgroundColor", bannerBackgroundColor);
+        settings.put("bannerText", bannerText);
+        settings.put("bannerTextColor", bannerTextColor);
+        settings.put("bannerFontWeight", bannerFontWeight);
+        settings.put("lidarIndexerUrl", lidarIndexerUrl);
+        return settings;
     }
 }
