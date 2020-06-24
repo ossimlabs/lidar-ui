@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Posts from './components/Post';
-import Pagination from './components/Pagination';
 import axios from 'axios';
-import './styles.css';
+import '../styles.css';
+import LidarRecord from './LidarRecord';
+import Pagination from './Pagination';
+
 
 //Read in Data from the API
 const Search = (props) => {
@@ -34,7 +35,7 @@ const Search = (props) => {
   return (
     <div className="Search">
       <h1>Star Wars Characters</h1>
-      <Posts posts={currentPosts} loading={loading} />
+      <LidarRecord posts={currentPosts} loading={loading} />
       <Pagination
         postsPerPage={postsPerPage}
         totalPosts={posts.length}
