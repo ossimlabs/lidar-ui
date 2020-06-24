@@ -17,38 +17,27 @@ node("${BUILD_NODE}") {
 		checkout scm
 	}
 	
+    	stage ( "Assemble" ) {
+		sh """
+		    export CHROMEDRIVER_SKIP_DOWNLOAD=true
+		    ./gradlew assembleServerAndClient
+		"""
+    	}
+	
 	stage ('Build image') {
-        sh """
-           docker build -t nexus-docker-private-hosted.ossim.io/lidar-search-ui .
-        """		
-    }
+		sh """
+		   docker build -t nexus-docker-private-hosted.ossim.io/lidar-search-ui .
+		"""		
+    	}
 
 	stage('Push Docker Images to Nexus Registry'){
 		withDockerRegistry(credentialsId: 'mavenCredentials', url: "https://nexus-docker-private-hosted.ossim.io")  {
-			
+
 			sh """
 			   docker push nexus-docker-private-hosted.ossim.io/lidar-search-ui
 			"""
 		}
 	}
-		
-    try {
-       	stage ("OpenShift Tag Image") {
-           	withCredentials([[$class: 'UsernamePasswordMultiBinding',
-				credentialsId: 'openshiftCredentials',
-				usernameVariable: 'OPENSHIFT_USERNAME',
-				passwordVariable: 'OPENSHIFT_PASSWORD']]){
-				
-                	// Run all tasks on the app. This includes pushing to OpenShift and S3.
-                	sh """
-                    	./gradlew openshiftTagImage \
-                        	-PossimMavenProxy
-                	"""
-            	}
-			}
-    	} catch (e) {
-        	echo e.toString()
-    	}
 
     stage("Clean Workspace"){
         if ("${CLEAN_WORKSPACE}" == "true")

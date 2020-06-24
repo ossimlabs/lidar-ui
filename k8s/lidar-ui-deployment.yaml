@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lidar-ui
+  labels:
+    app: lidar-ui
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: lidar-ui
+      labels:
+        app: lidar-ui
+    spec:
+      containers:
+        - name: lidar-ui
+          image: lidar-ui
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: lidar-ui

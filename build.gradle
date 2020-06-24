@@ -1,15 +1,18 @@
-task copyClientResources(dependsOn: ':client:build') { //<1>
+task copyClientResources( type: Copy, dependsOn: ':client:build' ) {
     group = 'build'
     description = 'Copy client resources into server'
-}
-copyClientResources.doFirst { //<2>
-    copy {
-        from project(':client').buildDir.absolutePath
-        into "${project(':server').buildDir}/resources/main/public"
-    }
+    def srcDir = project(':client').buildDir.absolutePath
+    def destDir = "${ project( ':server' ).buildDir }/resources/main/public"
+
+    println "Copying files from ${ srcDir } to ${ destDir }"
+    //	println new File( destDir ).mkdirs()
+
+    from srcDir
+    into destDir
 }
 
-task assembleServerAndClient(dependsOn: ['copyClientResources', ':server:shadowJar']) { //<3>
+
+task assembleServerAndClient(dependsOn: ['copyClientResources', ':server:shadowJar']) {
     group = 'build'
     description = 'Build combined server & client JAR'
 }
@@ -21,3 +24,6 @@ task test {
 task check {
 
 }
+
+tasks.getByPath( ':server:shadowJar' ).mustRunAfter( copyClientResources )
+
