@@ -5,12 +5,14 @@ micronaut:
 
 settings:
   banner:
-    text: ${BANNER_CLASSIFICATION_TEXT:Unclassified-FOOBAR}
+    text: ${BANNER_CLASSIFICATION_TEXT:Unclassified}
     background-color: ${BANNER_CLASSIFICATION_BACKGROUND_COLOR:green}
     text-color: ${BANNER_CLASSIFICATION_TEXT_COLOR:white}
     font-weight: ${BANNER_CLASSIFICATION_FONT_WEIGHT:bold}
   lidar-indexer:
     url: ${LIDAR_INDEXER_URL:`http://lidar-indexer.ossim.io/lidarProducts/findAll`}
+  pagination:
+    posts-per-page: 4
 
 ---
 micronaut:

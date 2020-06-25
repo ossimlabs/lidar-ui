@@ -24,6 +24,9 @@ public class ConfigController {
     @Value("${settings.lidar-indexer.url}")
     private String lidarIndexerUrl;
 
+    @Value("${settings.pagination.posts-per-page}")
+    private String postsPerPage;
+
   @Get
     public Map <String, String> index() {
         Map <String, String> settings = new HashMap<>();
@@ -32,6 +35,7 @@ public class ConfigController {
         settings.put("bannerTextColor", bannerTextColor);
         settings.put("bannerFontWeight", bannerFontWeight);
         settings.put("lidarIndexerUrl", lidarIndexerUrl);
+        settings.put("postsPerPage", postsPerPage);
         return settings;
     }
 }
