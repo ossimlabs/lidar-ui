@@ -14,8 +14,17 @@ spec:
     spec:
       containers:
         - name: lidar-ui
-          image: lidar-ui
+          image: nexus-docker-public-hosted.ossim.io/lidar-ui
           imagePullPolicy: IfNotPresent
+          env:
+            - name: LIDAR_INDEXER_URL
+              value: https://lidar-indexer.ossim.io/lidarProducts/findAll
+            - name: BANNER_CLASSIFICATION_TEXT
+              value: green
+            - name: BANNER_CLASSIFICATION_TEXT_COLOR
+              value: white
+            - name: BANNER_CLASSIFICATION_FONT_WEIGHT
+              value: bold
       restartPolicy: Always
   selector:
     matchLabels:

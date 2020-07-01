@@ -3,9 +3,14 @@ kind: Service
 metadata:
   name: lidar-ui
 spec:
-  selector:
-    app: lidar-ui
+  #clusterIP: 172.20.31.75
   ports:
     - port: 8080
+      protocol: TCP
       targetPort: 8080
-  type: NodePort
+  selector:
+    app: lidar-ui
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

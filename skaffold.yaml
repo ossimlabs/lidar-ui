@@ -4,9 +4,10 @@ metadata:
   name: lidar-ui
 build:
   artifacts:
-  - image: lidar-ui
+  - image: nexus-docker-public-hosted.ossim.io/lidar-ui
 deploy:
   kubectl:
     manifests:
     - k8s/lidar-ui-deployment.yaml
     - k8s/lidar-ui-service.yaml
+    - k8s/lidar-ui-ingress.yaml
