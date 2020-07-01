@@ -1,4 +1,4 @@
-# LIDAR-Search-UI
+# lidar-ui
 A UI for obtaining converted and indexed LIDAR data.
 
 #### Development

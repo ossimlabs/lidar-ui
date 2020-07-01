@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: lidar-ui
 spec:
-  #clusterIP: 172.20.31.75
   ports:
     - port: 8080
       protocol: TCP
