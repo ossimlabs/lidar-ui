@@ -11,6 +11,7 @@ const Search = (props) => {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(props.postsPerPage);
+  const [viewerBaseURL] = useState(props.viewerBaseURL);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -32,12 +33,20 @@ const Search = (props) => {
 
   // Hide the pagination if there is only one page of records
   if (posts.length <= postsPerPage) {
-    return <LidarTable lidarRecords={currentPosts} loading={loading} />
+    return <LidarTable
+        lidarRecords={currentPosts}
+        loading={loading}
+        viewerBaseURL={viewerBaseURL}
+    />
   }
 
   return (
     <React.Fragment>
-      <LidarTable lidarRecords={currentPosts} loading={loading} />
+      <LidarTable
+          lidarRecords={currentPosts}
+          loading={loading}
+          viewerBaseURL={viewerBaseURL}
+      />
       <Pagination
         postsPerPage={postsPerPage}
         totalPosts={posts.length}

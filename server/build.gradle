@@ -49,6 +49,7 @@ tasks.withType(JavaCompile){
 }
 
 shadowJar {
+    archiveFileName = "${ rootProject.name }-${ project.version }.jar"
     mergeServiceFiles()
 }
 

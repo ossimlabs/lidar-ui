@@ -3,6 +3,7 @@ package LidarSearch.micronaut;
 import io.micronaut.context.annotation.Value;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,15 +28,20 @@ public class ConfigController {
     @Value("${settings.pagination.posts-per-page}")
     private String postsPerPage;
 
-  @Get
-    public Map <String, String> index() {
-        Map <String, String> settings = new HashMap<>();
+    @Value("${settings.viewer.baseURL}")
+    private String viewerBaseURL;
+
+    @Get
+    public Map<String, String> index() {
+        Map<String, String> settings = new HashMap<>();
         settings.put("bannerBackgroundColor", bannerBackgroundColor);
         settings.put("bannerText", bannerText);
         settings.put("bannerTextColor", bannerTextColor);
         settings.put("bannerFontWeight", bannerFontWeight);
         settings.put("lidarIndexerUrl", lidarIndexerUrl);
         settings.put("postsPerPage", postsPerPage);
+        settings.put("viewerBaseURL", viewerBaseURL);
+
         return settings;
     }
 }

@@ -13,6 +13,8 @@ settings:
     url: ${LIDAR_INDEXER_URL:`http://lidar-indexer.ossim.io/lidarProducts/findAll`}
   pagination:
     posts-per-page: 4
+  viewer:
+    baseURL: ${LIDAR_VIEWER_BASE_URL:`http://localhost`}
 
 ---
 micronaut:
