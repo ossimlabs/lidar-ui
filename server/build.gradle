@@ -4,7 +4,7 @@ plugins {
     id "application"
 }
 
-version "0.1"
+version "0.2"
 group "example"
 
 repositories {
@@ -49,6 +49,7 @@ tasks.withType(JavaCompile){
 }
 
 shadowJar {
+    archiveFileName = "${ rootProject.name }-${ project.version }.jar"
     mergeServiceFiles()
 }
 
