@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import axios from "axios";
 import "./styles.css";
 import { SERVER_URL } from "./config";
@@ -22,6 +22,7 @@ class App extends React.Component {
         color: response.data.bannerTextColor,
         fontWeight: response.data.bannerFontWeight,
         lidarIndexerUrl: response.data.lidarIndexerUrl,
+        lidarS3WebHostUrl: response.data.lidarS3WebHostUrl,
         postsPerPage: response.data.postsPerPage
       });
     });
@@ -50,6 +51,7 @@ class App extends React.Component {
             <h1>Lidar</h1>
             <h4>Web-based viewer data</h4>
             <Search
+              s3WebHostLink={this.state.lidarS3WebHostUrl}
               indexerUrl={this.state.lidarIndexerUrl}
               postsPerPage={this.state.postsPerPage}
             />

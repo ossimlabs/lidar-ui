@@ -2,7 +2,7 @@ import React from "react";
 import Table from "react-bootstrap/Table";
 import LidarTableRow from "./LidarTableRow";
 
-const LidarTable = ({ lidarRecords, loading }) => {
+const LidarTable = ({ s3WebHostLink, lidarRecords, loading }) => {
   if (loading) {
     return <h2>Loading table...</h2>;
   }
@@ -13,13 +13,13 @@ const LidarTable = ({ lidarRecords, loading }) => {
             <th>Id</th>
             <th>Ingested</th>
             <th>Name</th>
-            <th>Link</th>
+            <th>Project</th>
+            <th>Zip</th>
           </tr>
         </thead>
-        <tbody className="table">
-          <LidarTableRow lidarRecords={lidarRecords} loading={loading} />
+        <tbody>
+          <LidarTableRow s3WebHostLink={s3WebHostLink} lidarRecords={lidarRecords} loading={loading} />
         </tbody>
-        {/*<tfoot></tfoot>*/}
       </Table>
   );
 };

@@ -11,12 +11,12 @@ const Search = (props) => {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(props.postsPerPage);
+  const s3WebHostLink = props.s3WebHostLink
 
   useEffect(() => {
     const fetchPost = async () => {
       setLoading(true);
       const response = await axios.get(props.indexerUrl);
-
       setPost(response.data);
       setLoading(false);
     };
@@ -37,7 +37,7 @@ const Search = (props) => {
 
   return (
     <React.Fragment>
-      <LidarTable lidarRecords={currentPosts} loading={loading} />
+      <LidarTable s3WebHostLink={s3WebHostLink} lidarRecords={currentPosts} loading={loading} />
       <Pagination
         postsPerPage={postsPerPage}
         totalPosts={posts.length}
