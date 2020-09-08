@@ -2,6 +2,8 @@ plugins {
     id "net.ltgt.apt-eclipse" version "0.21"
     id "com.github.johnrengelman.shadow" version "5.0.0"
     id "application"
+    id "com.google.cloud.tools.jib" version "2.5.0"
+    id "com.github.ben-manes.versions" version "0.31.0"
 }
 
 version "0.3"
@@ -55,3 +57,43 @@ shadowJar {
 
 run.classpath += configurations.developmentOnly
 run.jvmArgs('-noverify', '-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
+
+mainClassName = 'LidarSearch.micronaut.Application'
+
+jib {
+    from {
+        image = 'adoptopenjdk/openjdk13-openj9:jdk-13.0.2_8_openj9-0.18.0-alpine-slim'
+    }
+    to {
+        image =  'nexus-docker-public-hosted.ossim.io/lidar-ui'
+        tags = ['latest']
+    }
+    extraDirectories {
+        paths {
+            path {
+                from = file('src/main/jib')
+                into = "/app"
+            }
+            path {
+                from = file('src/main/jib')
+                into = "/app"
+            }
+        }
+        permissions = [
+            "/app/run_java.sh": "755"
+        ]
+    }
+    containerizingMode = 'packaged'
+    container {
+        environment = [
+            JAVA_APP_DIR: '/app',
+            JAVA_MAIN_CLASS: mainClassName,
+            JAVA_CLASSPATH: '/app/classpath/*:/app/libs/*',
+            JAVA_OPTIONS: '-server -Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom -XshowSettings:vm -XX:+UseStringDeduplication '
+        ]
+        ports = ['8080']
+        creationTime = 'USE_CURRENT_TIMESTAMP'
+        entrypoint = ['/app/run_java.sh']
+    }
+}
+
