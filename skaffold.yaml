@@ -2,12 +2,19 @@ apiVersion: skaffold/v2beta4
 kind: Config
 metadata:
   name: lidar-ui
+
 build:
   artifacts:
   - image: nexus-docker-public-hosted.ossim.io/lidar-ui
+    jib:
+      project: server
+  tagPolicy:
+    sha256: {}
+
 deploy:
-  kubectl:
-    manifests:
-    - k8s/lidar-ui-deployment.yaml
-    - k8s/lidar-ui-service.yaml
-    - k8s/lidar-ui-ingress.yaml
+  helm:
+    releases:
+    - name:  lidar-ui
+      chartPath: chart
+      artifactOverrides:
+        image: nexus-docker-public-hosted.ossim.io/lidar-ui
