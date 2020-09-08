@@ -27,3 +27,6 @@ task check {
 
 tasks.getByPath( ':server:shadowJar' ).mustRunAfter( copyClientResources )
 
+task assemble {
+    dependsOn( assembleServerAndClient )
+}
