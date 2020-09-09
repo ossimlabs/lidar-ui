@@ -11,7 +11,6 @@ task copyClientResources( type: Copy, dependsOn: ':client:build' ) {
     into destDir
 }
 
-
 task assembleServerAndClient(dependsOn: ['copyClientResources', ':server:shadowJar']) {
     group = 'build'
     description = 'Build combined server & client JAR'
@@ -27,3 +26,8 @@ task check {
 
 tasks.getByPath( ':server:shadowJar' ).mustRunAfter( copyClientResources )
 
+task assemble {
+    dependsOn( assembleServerAndClient )
+}
+
+tasks.getByPath( ':server:jibDockerBuild' ).dependsOn( assemble )

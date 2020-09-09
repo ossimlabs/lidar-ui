@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: lidar-ui
+  name:  {{ .Chart.Name }}
 spec:
   ports:
     - port: 8080
       protocol: TCP
       targetPort: 8080
   selector:
-    app: lidar-ui
+    app:  {{ .Chart.Name }}
   sessionAffinity: None
   type: ClusterIP
 status:

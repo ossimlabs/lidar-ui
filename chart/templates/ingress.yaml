@@ -5,7 +5,7 @@ metadata:
     field.cattle.io/publicEndpoints: '[{"addresses":[""],"port":443,"protocol":"HTTPS",
     "serviceName":"lidar:lidar-ui","ingressName":"lidar:lidar-ui","hostname":"lidar.ossim.io","path":"/",
     "allNodes":false}]'
-  name: lidar-ui
+  name:  {{ .Chart.Name }}
   namespace: lidar
 spec:
   rules:
@@ -13,7 +13,7 @@ spec:
     http:
       paths:
         - backend:
-            serviceName: lidar-ui
+            serviceName:  {{ .Chart.Name }}
             servicePort: 8080
           path: /
   tls:

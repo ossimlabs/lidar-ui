@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: lidar-ui
+  name: {{ .Chart.Name }}
   labels:
-    app: lidar-ui
+    app: {{ .Chart.Name }}
 spec:
   replicas: 1
   template:
     metadata:
-      name: lidar-ui
+      name:  {{ .Chart.Name }}
       labels:
-        app: lidar-ui
+        app: {{ .Chart.Name }}
     spec:
       containers:
-        - name: lidar-ui
-          image: nexus-docker-public-hosted.ossim.io/lidar-ui
+        - name:  {{ .Chart.Name }}
+          image: {{ .Values.global.image.name }}
           imagePullPolicy: IfNotPresent
           env:
             - name: LIDAR_INDEXER_URL
@@ -28,4 +28,4 @@ spec:
       restartPolicy: Always
   selector:
     matchLabels:
-      app: lidar-ui
+      app:  {{ .Chart.Name }}
