@@ -10,7 +10,7 @@ settings:
     text-color: ${BANNER_CLASSIFICATION_TEXT_COLOR:white}
     font-weight: ${BANNER_CLASSIFICATION_FONT_WEIGHT:bold}
   lidar-indexer:
-    url: ${LIDAR_INDEXER_URL:`https://lidar-indexer.ossim.io/lidarProducts/findAll`}
+    url: ${LIDAR_INDEXER_URL:`http://localhost:8081/lidarProducts/findAll`}
   lidar-s3-web-host:
     url: ${LIDAR_S3_WEB_HOST_URL:`https://gsp-lidar-webhost.s3.amazonaws.com`}
   pagination:
