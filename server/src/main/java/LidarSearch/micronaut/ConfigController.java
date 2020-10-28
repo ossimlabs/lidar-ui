@@ -24,8 +24,8 @@ public class ConfigController {
     @Value("${settings.lidar-indexer.url}")
     private String lidarIndexerUrl;
 
-    @Value("${settings.lidar-s3-web-host.url}")
-    private String lidarS3WebHostUrl;
+    @Value("${settings.lidar-web-host.url}")
+    private String lidarWebHostUrl;
 
     @Value("${settings.pagination.posts-per-page}")
     private String postsPerPage;
@@ -38,7 +38,7 @@ public class ConfigController {
         settings.put("bannerTextColor", bannerTextColor);
         settings.put("bannerFontWeight", bannerFontWeight);
         settings.put("lidarIndexerUrl", lidarIndexerUrl);
-        settings.put("lidarS3WebHostUrl", lidarS3WebHostUrl);
+        settings.put("lidarWebHostUrl", lidarWebHostUrl);
         settings.put("postsPerPage", postsPerPage);
         return settings;
     }

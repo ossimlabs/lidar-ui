@@ -14,7 +14,7 @@ const Search = (props) => {
   const [totalPosts, setTotalPosts] = useState(0)
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setQuery] = useState("");
-  const s3WebHostLink = props.s3WebHostLink;
+  const webHostLink = props.webHostLink;
 
   const POSTS_PER_PAGE = 5;
 
@@ -56,7 +56,7 @@ const Search = (props) => {
           setCurrentPage(1)
         }}
       />
-      <DataTable data={postsData} s3WebHostLink={s3WebHostLink}/> 
+      <DataTable data={postsData} webHostLink={webHostLink}/> 
       <Pagination
         total = {totalPosts}
         postsPerPage={POSTS_PER_PAGE}
