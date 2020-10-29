@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import Table from "react-bootstrap/Table"
 
-function DataTable({data, s3WebHostLink}) {
+function DataTable({data, webHostLink}) {
     return (
         <Table className="table table-striped" cellSpacing={0} cellPadding={0}>
             <thead>
@@ -20,10 +20,10 @@ function DataTable({data, s3WebHostLink}) {
                      <td>{new Date(info.ingest_date).toDateString()}</td>
                      <td>{info.keyword}</td>
                      <td>
-                     <a href={s3WebHostLink + info.s3_link + "/index.html"} target="_blank" rel="noopener noreferrer">View</a>
+                     <a href={webHostLink + info.s3_link + "/index.html"} target="_blank" rel="noopener noreferrer">View</a>
                     </td>
                     <td>
-                    <a href={s3WebHostLink + info.s3_link} target="_blank" rel="noopener noreferrer">Download</a>
+                    <a href={webHostLink + info.s3_link} target="_blank" rel="noopener noreferrer">Download</a>
                     </td>
                 </tr>)}
             </tbody>

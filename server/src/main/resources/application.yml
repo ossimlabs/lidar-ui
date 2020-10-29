@@ -11,10 +11,10 @@ settings:
     font-weight: ${BANNER_CLASSIFICATION_FONT_WEIGHT:bold}
   lidar-indexer:
     url: ${LIDAR_INDEXER_URL:`http://localhost:8081/lidarProducts/findAll`}
-  lidar-s3-web-host:
-    url: ${LIDAR_S3_WEB_HOST_URL:`https://gsp-lidar-webhost.s3.amazonaws.com`}
+  lidar-web-host:
+    url: ${LIDAR_WEB_HOST_URL:`https://gsp-lidar-webhost.s3.amazonaws.com`}
   pagination:
-    posts-per-page: 4
+    posts-per-page: 5
 
 ---
 micronaut:

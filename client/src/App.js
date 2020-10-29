@@ -23,7 +23,7 @@ class App extends React.Component {
         color: response.data.bannerTextColor,
         fontWeight: response.data.bannerFontWeight,
         lidarIndexerUrl: response.data.lidarIndexerUrl,
-        lidarS3WebHostUrl: response.data.lidarS3WebHostUrl,
+        lidarWebHostUrl: response.data.lidarWebHostUrl,
         postsPerPage: 5
       });
     });
@@ -52,7 +52,7 @@ class App extends React.Component {
             <h1 className="heading">Lidar</h1>
             <h4 className="subheading">Web-based viewer data</h4>
             <Search
-              s3WebHostLink={this.state.lidarS3WebHostUrl}
+              webHostLink={this.state.lidarWebHostUrl}
               indexerUrl={this.state.lidarIndexerUrl}
               postsPerPage={this.state.postsPerPage}
               SearchBy
