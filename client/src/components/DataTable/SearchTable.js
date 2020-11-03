@@ -4,8 +4,6 @@ import React, { useState } from "react"
 const SearchTable = ({onSearch}) => {
   const [search , setSearch] = useState('')
 
-  console.log(onSearch)
-
   const onInputChange = (value) => {
     setSearch(value)
     onSearch(value)

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import "../styles.css";
+import UploadFile from "./UploadFile";
 import DataTable from "./DataTable/DataTable";
 import "../search-style.css"
 import Pagination from "./DataTable/Pagination"
@@ -49,7 +50,8 @@ const Search = (props) => {
   },[posts, currentPage, search])
 
   return (
-    <React.Fragment>  
+    <React.Fragment>
+      <UploadFile />
       <SearchTable
         onSearch={value => {
           setQuery(value)
