@@ -11,7 +11,6 @@ import SearchTable from "./DataTable/SearchTable";
 const Search = (props) => {
   
   const [posts, setPost] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [totalPosts, setTotalPosts] = useState(0)
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setQuery] = useState("");
@@ -21,10 +20,8 @@ const Search = (props) => {
 
   useEffect(() => {
     const fetchPost = async () => {
-      setLoading(true);
       const response = await axios.get(props.indexerUrl);
       setPost(response.data);
-      setLoading(false);
     };
     fetchPost();
   }, []);
