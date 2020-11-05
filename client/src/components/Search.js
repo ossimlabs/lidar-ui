@@ -42,7 +42,7 @@ const Search = (props) => {
     setTotalPosts(filteredPosts.length)
 
     // slices the filtered post that have been searched over or all the 
-    // posts by defualt if no search is entered for the pagiation
+    // posts by default if no search is entered for the pagination
     return filteredPosts.slice(
       (currentPage - 1) * POSTS_PER_PAGE,
       (currentPage - 1) * POSTS_PER_PAGE + POSTS_PER_PAGE)
