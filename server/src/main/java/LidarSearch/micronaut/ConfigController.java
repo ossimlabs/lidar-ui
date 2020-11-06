@@ -27,6 +27,9 @@ public class ConfigController {
     @Value("${settings.lidar-web-host.url}")
     private String lidarWebHostUrl;
 
+    @Value("${settings.lidar-upload.url}")
+    private String lidarUploadUrl;
+
     @Value("${settings.pagination.posts-per-page}")
     private String postsPerPage;
 
@@ -39,6 +42,7 @@ public class ConfigController {
         settings.put("bannerFontWeight", bannerFontWeight);
         settings.put("lidarIndexerUrl", lidarIndexerUrl);
         settings.put("lidarWebHostUrl", lidarWebHostUrl);
+        settings.put("lidarUploadUrl", lidarUploadUrl);
         settings.put("postsPerPage", postsPerPage);
         return settings;
     }

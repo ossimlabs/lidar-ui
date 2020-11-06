@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+import Button from 'react-bootstrap/Button'
+
 class UploadFile extends Component {
+
   state = {
     selectedFile: null,
     selectedFileError: false,
@@ -9,7 +12,9 @@ class UploadFile extends Component {
     fileType: 'potree',
     fileUploadButtonDisabled: true,
     fileUploadProgress: 0,
-    fileUploadMessageShow: false
+    fileUploadMessageShow: false,
+    fileUploadError: false,
+    fileUploadErrorMessage: ''
   }
 
   fileSelectedHandler = event => {
@@ -18,7 +23,7 @@ class UploadFile extends Component {
 
     // Check the file extension.  It should be a .las,
     // otherwise display a validation error
-    if(fileNameExtension === "las"){
+    if(fileNameExtension === "las" || fileNameExtension === "laz"){
       this.setState({
         selectedFile: event.target.files[0],
         selectedFileError: false,
@@ -50,10 +55,9 @@ class UploadFile extends Component {
       fd.append('fileName', this.state.selectedFile.name);
       fd.append('fileType', this.state.fileType);
 
-      // TODO: Make configurable: url
       axios({
         method: 'post',
-        url: 'http://localhost:8081/upload',
+        url: this.props.uploadUrl,
         data: fd,
         onUploadProgress: progressEvent => {
           this.setState({fileUploadProgress: Math.round(progressEvent.loaded / progressEvent.total* 100)})
@@ -68,7 +72,11 @@ class UploadFile extends Component {
           });
         })
         .catch(error => {
-          console.log(error)
+          console.log(error);
+          this.setState({
+            fileUploadError: true,
+            fileUploadErrorMessage: 'An error occurred while attempting to upload the file.'
+          });
         })
     } else {
       // We need to provide feedback here that the upload file was not
@@ -97,38 +105,44 @@ class UploadFile extends Component {
   render(){
     return (
       <div>
+        <br/>
         <div>
-          Upload a valid Lidar file (.las) - 1GB limit<br/>
           <input id="file" type="file" onChange={this.fileSelectedHandler}/>
         </div>
         {this.state.selectedFileError && <span style={{color: 'red'}}>{this.state.selectedFileErrorMessage}</span>}
-        <div>
-          <label htmlFor="converter">Converter service: &nbsp;</label>
-          <select id="fileType" name="fileType" onChange={this.fileTypeHandler}>
+        <br/>
+        <div className="form-group">
+          <label htmlFor="converter">Converter: &nbsp;</label>
+          <select className="form-control" id="fileType" name="fileType" onChange={this.fileTypeHandler}>
             <option value="potree">Potree</option>
             <option value="entwine">Entwine</option>
           </select>
         </div>
         <div>
-          <button disabled={this.state.fileUploadButtonDisabled} onClick={this.fileUploadHandler}>Upload</button><br/>
+          <Button variant="primary" disabled={this.state.fileUploadButtonDisabled} onClick={this.fileUploadHandler}>Upload</Button><br/>
           {this.state.fileUploadProgress > 0 &&
-          <div className="progress">
-            <div
-              className="progress-bar progress-bar-info progress-bar-striped"
-              role="progressbar"
-              aria-valuenow={this.state.fileUploadProgress}
-              aria-valuemin="0"
-              aria-valuemax="100"
-              style={{ width: this.state.fileUploadProgress + "%" }}
-            >
-              {this.state.fileUploadProgress}%
+            <div style={{marginTop: "10px"}} className="progress">
+              <div
+                className="progress-bar progress-bar-info progress-bar-striped"
+                role="progressbar"
+                aria-valuenow={this.state.fileUploadProgress}
+                aria-valuemin="0"
+                aria-valuemax="100"
+                style={{ width: this.state.fileUploadProgress + "%" }}
+              >
+                {this.state.fileUploadProgress}%
+              </div>
             </div>
-          </div>
           }
           {this.state.fileUploadMessageShow &&
             <div>
-              <span style={{color: 'green'}}>File uploaded successfully!</span>
-              <button onClick={this.resetFormHandler}>Load another file</button>
+              <p style={{color: 'green'}}>File uploaded successfully!</p>
+              <Button variant="secondary" onClick={this.resetFormHandler}>Load another file</Button>
+            </div>
+          }
+          {this.state.fileUploadError &&
+            <div style={{marginTop: "10px"}}>
+              <p style={{color: 'red'}}>Error: {this.state.fileUploadErrorMessage}</p>
             </div>
           }
         </div>

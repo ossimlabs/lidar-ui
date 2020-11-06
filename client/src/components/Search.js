@@ -1,15 +1,12 @@
 import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import "../styles.css";
-import UploadFile from "./UploadFile";
 import DataTable from "./DataTable/DataTable";
 import "../search-style.css"
 import Pagination from "./DataTable/Pagination"
 import SearchTable from "./DataTable/SearchTable";
 
-//Read in Data from the API
 const Search = (props) => {
-  
   const [posts, setPost] = useState([]);
   const [totalPosts, setTotalPosts] = useState(0)
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,12 +15,44 @@ const Search = (props) => {
 
   const POSTS_PER_PAGE = 5;
 
+  const fetchPost = () => {
+
+    let fetchPostTimer =  setInterval(
+      function getLidarRecords(){
+        console.log('Getting Lidar Records');
+        axios.get(props.indexerUrl)
+          .then(response => {
+            setPost(response.data);
+          })
+          .catch(error => {
+            console.log(`${error}`);
+          });
+
+        // Clear the initial 0ms interval that is used the very
+        // first time the page is loaded.  Subsequent calls will
+        // be every 5000ms
+        clearInterval(fetchPostTimer);
+
+        // Set a new interval to
+        fetchPostTimer = setInterval(
+          getLidarRecords, 5000
+        )
+
+      },0
+    );
+  };
+
   useEffect(() => {
-    const fetchPost = async () => {
-      const response = await axios.get(props.indexerUrl);
-      setPost(response.data);
-    };
-    fetchPost();
+    //let interval =  setInterval(() => {
+      fetchPost();
+
+      // interval = setInterval(() => {
+      //     fetchPost();
+      // }, 5000)
+    //}, 3000);
+    //return () => clearInterval(interval);
+    //clearInterval(interval);
+
   }, []);
 
   // search  and  pagination computations
@@ -48,7 +77,6 @@ const Search = (props) => {
 
   return (
     <React.Fragment>
-      <UploadFile />
       <SearchTable
         onSearch={value => {
           setQuery(value)
