@@ -11,6 +11,8 @@ const Search = (props) => {
   const [totalPosts, setTotalPosts] = useState(0)
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setQuery] = useState("");
+  const [refreshTable, setRefreshTable] = useState(true);
+
   const webHostLink = props.webHostLink;
 
   const POSTS_PER_PAGE = 5;
@@ -19,7 +21,7 @@ const Search = (props) => {
 
     let fetchPostTimer =  setInterval(
       function getLidarRecords(){
-        console.log('Getting Lidar Records');
+        //console.log('Getting Lidar Records');
         axios.get(props.indexerUrl)
           .then(response => {
             setPost(response.data);
@@ -29,29 +31,27 @@ const Search = (props) => {
           });
 
         // Clear the initial 0ms interval that is used the very
-        // first time the page is loaded.  Subsequent calls will
-        // be every 5000ms
+        // first time the page is loaded.
         clearInterval(fetchPostTimer);
 
-        // Set a new interval to
-        fetchPostTimer = setInterval(
-          getLidarRecords, 5000
-        )
+        if(refreshTable) {
+          console.log('In if check: ' + refreshTable);
+          // Set a new 5000ms interval to for each request that happens
+          // after initial page load.
+          fetchPostTimer = setInterval(
+            getLidarRecords, 5000
+          );
+
+        } else {
+          clearInterval(fetchPostTimer);
+        }
 
       },0
     );
   };
 
   useEffect(() => {
-    //let interval =  setInterval(() => {
-      fetchPost();
-
-      // interval = setInterval(() => {
-      //     fetchPost();
-      // }, 5000)
-    //}, 3000);
-    //return () => clearInterval(interval);
-    //clearInterval(interval);
+    fetchPost();
 
   }, []);
 
@@ -83,6 +83,7 @@ const Search = (props) => {
           setCurrentPage(1)
         }}
       />
+      <input type="checkbox" checked={refreshTable} onChange={(e) => {setRefreshTable(e.target.checked)}}/>
       <DataTable data={postsData} webHostLink={webHostLink}/> 
       <Pagination
         total = {totalPosts}
