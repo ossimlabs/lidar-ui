@@ -58,7 +58,6 @@ const Search = (props) => {
 
     setTotalPosts(filteredPosts.length);
 
-
     // slices the filtered post that have been searched over or all the
     // posts by defualt if no search is entered for the pagiation
     return filteredPosts.slice(
@@ -105,7 +104,6 @@ const Search = (props) => {
   );
 };
 
-
 function useInterval(callback, delay) {
   const savedCallback = useRef();
 
@@ -125,6 +123,5 @@ function useInterval(callback, delay) {
     }
   }, [delay]);
 }
-
 
 export default Search;
