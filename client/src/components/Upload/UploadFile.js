@@ -19,7 +19,9 @@ class UploadFile extends Component {
 
   fileSelectedHandler = event => {
     let fileName = event.target.files[0].name;
-    let fileNameExtension = fileName.split('.').pop()
+    let fileNameExtension = fileName.split('.').pop().trim()
+
+    console.log('fileNameExtension: ', fileNameExtension)
 
     // Check the file extension.  It should be a .las,
     // otherwise display a validation error
