@@ -10,9 +10,11 @@ settings:
     text-color: ${BANNER_CLASSIFICATION_TEXT_COLOR:white}
     font-weight: ${BANNER_CLASSIFICATION_FONT_WEIGHT:bold}
   lidar-indexer:
-    url: ${LIDAR_INDEXER_URL:`http://localhost:8081/lidarProducts/findAll`}
+    url: ${LIDAR_INDEXER_URL:`http://localhost/lidar-indexer/lidarProducts/findAll`}
   lidar-web-host:
-    url: ${LIDAR_WEB_HOST_URL:`https://gsp-lidar-webhost.s3.amazonaws.com`}
+    url: ${LIDAR_WEB_HOST_URL:`http://localhost`}
+  lidar-upload:
+    url: ${LIDAR_UPLOAD_URL:`http://localhost/lidar-converter-server/upload`}
   pagination:
     posts-per-page: 5
 

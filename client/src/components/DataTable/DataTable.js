@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react"
+import React from "react"
 import Table from "react-bootstrap/Table"
 
 function DataTable({data, webHostLink}) {
@@ -20,10 +20,10 @@ function DataTable({data, webHostLink}) {
                      <td>{new Date(info.ingest_date).toDateString()}</td>
                      <td>{info.keyword}</td>
                      <td>
-                     <a href={webHostLink + info.s3_link + "/index.html"} target="_blank" rel="noopener noreferrer">View</a>
+                     <a href={`${webHostLink}${info.s3_link}/index.html`} target="_blank" rel="noopener noreferrer">View</a>
                     </td>
                     <td>
-                    <a href={webHostLink + info.s3_link} target="_blank" rel="noopener noreferrer">Download</a>
+                    <a href={`${webHostLink}${info.s3_link}/${info.keyword}.zip`} target="_blank" rel="noopener noreferrer">Download</a>
                     </td>
                 </tr>)}
             </tbody>
