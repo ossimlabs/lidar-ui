@@ -6,8 +6,10 @@ function DataTable({data, webHostLink}) {
         <Table className="table table-striped" cellSpacing={0} cellPadding={0}>
             <thead>
                 <tr>
+                    <th>Status</th>
                     <th>ID</th>
                     <th>Ingested</th>
+                    <th>Type</th>
                     <th>Name</th>
                     <th>Project</th>
                     <th>Zip</th>               
@@ -16,8 +18,10 @@ function DataTable({data, webHostLink}) {
             <tbody>
                 {data.map(info => 
                 <tr key={info.id}>
+                     <td>{info.status}</td>
                      <td>{info.id}</td>
                      <td>{new Date(info.ingest_date).toDateString()}</td>
+                     <td>{info.type}</td>
                      <td>{info.keyword}</td>
                      <td>
                      <a href={`${webHostLink}${info.s3_link}/index.html`} target="_blank" rel="noopener noreferrer">View</a>
