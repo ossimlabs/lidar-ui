@@ -54,8 +54,9 @@ class App extends React.Component {
           </header>
           <UploadFileModal uploadUrl={this.state.lidarUploadUrl}/>
           <div className="container-fluid">
-            <h1 className="heading">Lidar</h1>
-            <h4 className="subheading">Web-based viewer data</h4>
+            <h1 className="heading">Lidar Viewer</h1>
+            <h4 className="subheading">Upload, Convert, and View Lidar Data</h4>
+            <p style={{color: "grey"}} className="small">The Lidar Viewer application allows you to upload lidar data (.las or .laz format). It will convert the data into Potree or Entwine formats.  Once the conversion process is done you can view the Potree data in the browser, or download a zip file an run it locally. The Entwine data can be downloaded and viewed using the Entwine application.</p>
             <Search
               webHostLink={this.state.lidarWebHostUrl}
               indexerUrl={this.state.lidarIndexerUrl}
